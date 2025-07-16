@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import PropertyCard from "@/components/property/PropertyCard";
 import { Geist, Geist_Mono } from "next/font/google";
+import { PropertyProps } from "@/interfaces";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,28 +13,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-interface Property {
-  id: string;
-  name: string;
-  image: string;
-  price: number;
-  address: {
-    city: string;
-    country: string;
-  };
-  rating: number;
-  category: string[];
-}
-
 export default function Home() {
-  const [properties, setProperties] = useState<Property[]>([]);
+  const [properties, setProperties] = useState<PropertyProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await axios.get("/api/properties");
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/properties`);
         setProperties(res.data);
       } catch {
         setError("Failed to fetch properties.");

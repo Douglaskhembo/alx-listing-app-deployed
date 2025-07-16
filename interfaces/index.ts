@@ -10,9 +10,9 @@ export interface ButtonProps {
 }
 
 export interface PropertyProps {
-  id: string; // newly added
+  id: string;
   name: string;
-  description: string; // newly added
+  description: string;
   address: {
     state: string;
     city: string;
@@ -92,5 +92,4 @@ export const PROPERTYLISTINGSAMPLE: PropertyProps[] = [
     image: "https://example.com/image3.jpg",
     discount: ""
   },
-  // ...continue for other entries
 ];
